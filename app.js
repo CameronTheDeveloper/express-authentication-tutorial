@@ -62,6 +62,15 @@ app.post("/signup", async (req, res, next) => {
   };
 });
 
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/"
+  })
+);
+
+
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
