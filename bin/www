@@ -5,7 +5,7 @@
  */
 
 const app = require('../app');
-const debug = require('debug')('authentication-tutorial:server');
+const debug = require('debug')('express-authentication-tutorial:server');
 const http = require('http');
 
 /**
