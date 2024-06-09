@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.get("/", (req, res) => res.render("index"));
+app.get("/", (req, res) => res.render("index", {user: req.user}));
 app.get("/signup", (req, res) => res.render("sign-up-form"));
 app.get("/signin", (req, res) => res.render("sign-in-form"));
 

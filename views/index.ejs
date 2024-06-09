@@ -6,9 +6,12 @@
 </head>
 <body>
   <h1>hello world!</h1>
-  <h3>
-    <a href="/signin">Sign In here</a>
-    <a href="/signup">Sign Up here</a>
-  </h3>
+    <% if (user) {%>
+      <h1>WELCOME BACK <%= user.username %></h1>
+      <a href="/log-out">LOG OUT</a>
+    <% } else { %>
+      <a href="/signin">Sign In here</a>
+      <a href="/signup">Sign Up here</a>
+    <%}%>
 </body>
 </html>
