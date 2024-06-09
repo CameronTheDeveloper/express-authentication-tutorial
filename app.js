@@ -15,14 +15,21 @@ const Schema = mongoose.Schema;
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
-const app = express();
-
 const mongoDb = process.env.MONGODB_URI;
 mongoose.connect(mongoDb);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
+const User = mongoose.model(
+  "User",
+  new Schema({
+    username: { type: String, required: true },
+    password: { type: String, required: true }
+  })
+);
+
 // view engine setup
+const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
