@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -14,6 +16,11 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+
+const mongoDb = process.env.MONGODB_URI;
+mongoose.connect(mongoDb);
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "mongo connection error"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
