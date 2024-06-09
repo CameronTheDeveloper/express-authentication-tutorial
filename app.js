@@ -48,6 +48,20 @@ app.use('/users', usersRouter);
 app.get("/", (req, res) => res.render("index"));
 app.get("/signup", (req, res) => res.render("sign-up-form"));
 
+app.post("/sign-up", async (req, res, next) => {
+  try {
+    const user = new User({
+      username: req.body.username,
+      password: req.body.password
+    });
+    const result = await user.save();
+    res.redirect("/");
+  } catch(err) {
+    return next(err);
+  };
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
