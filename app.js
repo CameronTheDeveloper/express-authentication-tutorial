@@ -48,7 +48,7 @@ app.use('/users', usersRouter);
 app.get("/", (req, res) => res.render("index"));
 app.get("/signup", (req, res) => res.render("sign-up-form"));
 
-app.post("/sign-up", async (req, res, next) => {
+app.post("/signup", async (req, res, next) => {
   try {
     const user = new User({
       username: req.body.username,
