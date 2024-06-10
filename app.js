@@ -8,6 +8,7 @@ const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
+const bcrypt = require('bcryptjs');
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
@@ -51,12 +52,21 @@ app.get("/signin", (req, res) => res.render("sign-in-form"));
 
 app.post("/signup", async (req, res, next) => {
   try {
-    const user = new User({
-      username: req.body.username,
-      password: req.body.password
+
+    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+      // if err, do something
+      // otherwise, store hashedPassword in DB
+      if (err){
+        return next(err)
+      } else {
+        const user = new User({
+          username: req.body.username,
+          password: hashedPassword
+        });
+        const result = await user.save();
+        res.redirect("/");
+      }
     });
-    const result = await user.save();
-    res.redirect("/");
   } catch(err) {
     return next(err);
   };
